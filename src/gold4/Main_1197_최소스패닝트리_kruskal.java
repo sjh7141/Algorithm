@@ -1,3 +1,4 @@
+package gold4;
 
 
 import java.io.BufferedReader;
