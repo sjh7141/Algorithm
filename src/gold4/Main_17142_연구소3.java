@@ -69,9 +69,7 @@ public class Main_17142_연구소3 {
 			visited[vir[combi[i]].r][vir[combi[i]].c] = true;
 		}
 		int max = 0;
-		while(!queue.isEmpty()) {
-			int size = queue.size();
-			
+		while(!queue.isEmpty()) {			
 			Pos temp = queue.poll();
 				
 			for(int i =0; i<4; i++) {
