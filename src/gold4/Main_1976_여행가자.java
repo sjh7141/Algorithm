@@ -25,10 +25,10 @@ public class Main_1976_여행가자 {
 				int p1 = find(i);
 				int p2 = find(j);
 				if(isConnect == 1 && p1 != p2) {
-					if(rank[p1] > rank[p2]) {
-						parent[p2] = p1;
-					}else {
+					if(rank[p1] < rank[p2]) {
 						parent[p1] = p2;
+					}else {
+						parent[p2] = p1;
 					}
 					if(rank[p1] == rank[p2]) rank[p1]++;
 				}
