@@ -31,7 +31,7 @@ public class Main_4195_친구네트워크 {
 			}
 			num = new int[N*2];
 			Arrays.fill(num, 1);
-			
+			StringBuilder sb = new StringBuilder();
 			for(int i=0; i<N; i++) {
 				StringTokenizer tk = new StringTokenizer(br.readLine(), " ");
 				String id1 = tk.nextToken();
@@ -53,9 +53,9 @@ public class Main_4195_친구네트워크 {
 					num[find(idx2)] += num[find(idx1)];
 					parent[find(idx1)] = find(idx2);
 				}
-				System.out.println(num[find(idx2)]);
-				
+				sb.append(num[find(idx2)]).append("\n");
 			}
+			System.out.print(sb.toString());
 		}
 	}
 	private static int find(int p) {
