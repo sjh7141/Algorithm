@@ -12,10 +12,10 @@ public class Main_1756_피자굽기_이분탐색 {
 		StringTokenizer tk = new StringTokenizer(br.readLine(), " ");
 		D = Integer.parseInt(tk.nextToken());
 		N = Integer.parseInt(tk.nextToken());
-		oven = new int[D];
+		oven = new int[D+1];
 		pizza = new int[N];
 		tk = new StringTokenizer(br.readLine(), " ");
-		for(int i=0; i<D; i++) {
+		for(int i=1; i<D+1; i++) {
 			oven[i] = Integer.parseInt(tk.nextToken());
 		}
 		
@@ -24,16 +24,16 @@ public class Main_1756_피자굽기_이분탐색 {
 			pizza[i] = Integer.parseInt(tk.nextToken());
 		}
 		
-		for(int i=1; i<D; i++) {
+		for(int i=2; i<D+1; i++) {
 			if(oven[i-1]<oven[i]) oven[i] = oven[i-1];
 		}
 		
-		int bottom = D;
+		int bottom = D+1;
 		for(int i=0; i<N; i++) {
 			bottom = lowerBound(bottom,pizza[i]) - 1;
-			if(bottom<0) break;
+			if(bottom<=0) break;
 		}
-		System.out.println(bottom+1);
+		System.out.println(bottom < 0 ? 0 : bottom);
 		
 	}
 	
