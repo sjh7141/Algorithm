@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main_1932_정수삼각형 {
 	static int N;
@@ -21,15 +24,24 @@ public class Main_1932_정수삼각형 {
 			Arrays.fill(dp[i], -1);
 		}
 		
+		dp[0][0] = tri[0][0];
+		int max = 0;
 		for(int i=0; i<N; i++) {
-			dp[N-1][i] = tri[N-1][i];
+			max = Integer.max(max, solve(N-1,i));
 		}
 		
-		System.out.println(solve(0,0));
+		System.out.println(max);
 	}
 	private static int solve(int r, int c) {
 		if(dp[r][c] != -1) return dp[r][c];
-		dp[r][c] = tri[r][c] + Math.max(solve(r+1,c), solve(r+1,c+1));
+		int temp = -1;
+		if(c!=0) {
+			temp = Integer.max(temp, solve(r-1,c-1));
+		}
+		if(c!=r) {
+			temp = Integer.max(temp, solve(r-1,c));
+		}
+		dp[r][c] = tri[r][c] + temp;
 		return dp[r][c];
 	}
 
