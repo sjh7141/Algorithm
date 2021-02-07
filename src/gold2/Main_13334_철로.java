@@ -3,6 +3,7 @@ package gold2;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -31,8 +32,7 @@ public class Main_13334_철로 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		n = Integer.parseInt(br.readLine());
 		peopleList = new People[n];
-		PriorityQueue<People> pq = new PriorityQueue<People>();
-		ArrayDeque<People> deq = new ArrayDeque<People>();
+
 		for(int i=0; i<n; i++) {
 			StringTokenizer tk = new StringTokenizer(br.readLine());
 			int e1 = Integer.parseInt(tk.nextToken());
@@ -42,41 +42,25 @@ public class Main_13334_철로 {
 				e2 = e1;
 				e1 = temp;
 			}
-			pq.add(new People(e1, e2));
+			peopleList[i] = new People(e1, e2);
 		}
 		d = Integer.parseInt(br.readLine());
+		Arrays.sort(peopleList);
+		int ans = 0, cnt = 0;
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 		
-		int ans = 0, s = Integer.MIN_VALUE, e = Integer.MIN_VALUE;
-		while(!pq.isEmpty()) {
-			People cur = pq.poll();
-			if(cur.o-cur.h > d) continue;
-			if(cur.h>=s && cur.o<=e) {
-				deq.add(cur);
-				ans = Math.max(ans, deq.size());
-				continue;
-			}else {
-				if(s==Integer.MIN_VALUE && e==Integer.MIN_VALUE) {
-					deq.add(cur);
-					s = cur.h;
-					e = cur.o;
-					ans = Math.max(ans, deq.size());
-				}else {
-					e = cur.o;
-					if(e-s>d){
-						while(true) {
-							deq.poll();
-							if(deq.isEmpty()) break;
-							s = deq.peek().h;
-							if(e-s<=d) break; 
-						}
-					}
-					deq.add(cur);
-					ans = Math.max(ans, deq.size());
-					
-				}
+		for(People p : peopleList) {
+			while(!pq.isEmpty() && pq.peek() < p.o - d) {
+				pq.poll();
+				cnt--;
 			}
+			if(p.h >= p.o - d) {
+				cnt++;
+				pq.add(p.h);
+			}
+			
+			ans = Math.max(ans, cnt);
 		}
-		
 		System.out.println(ans);
 	}
 
