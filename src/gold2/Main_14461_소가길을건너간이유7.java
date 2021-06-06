@@ -1,10 +1,11 @@
+package gold2;
 import java.io.BufferedReader; 
 import java.io.InputStreamReader; 
 import java.util.Arrays; 
 import java.util.PriorityQueue; 
 import java.util.StringTokenizer; 
  
-public class Main { 
+public class Main_14461_소가길을건너간이유7 { 
 	static class Node implements Comparable<Node>{ 
 		int r,c,cnt,cost; 
  
